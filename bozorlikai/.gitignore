@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.env
+.venv/
+.idea/
+
+# Images / assets
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.ico
+
+# OS files
+.DS_Store
+Thumbs.db

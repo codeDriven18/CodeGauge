@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<title>Bozorlik AI — Aqlli xaridlar uchun AI yordamchi</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary: #ff8a00;
+    --primary-end: #ffb347;
+    --primary-soft: #fff3e0;
+    --text-main: #111827;
+    --text-muted: #6b7280;
+    --bg-main: #ffffff;
+    --bg-soft: #f9fafb;
+    --border-soft: #e5e7eb;
+    --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.08);
+    --radius-lg: 18px;
+    --radius-xl: 26px;
+    --radius-full: 999px;
+    --transition-fast: 0.18s ease-out;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+.page {
+    min-height: 100vh;
+    background: radial-gradient(circle at top left, #fff7ed 0, #ffffff 45%);
+}
+
+.container {
+    width: min(1120px, 100%);
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* HEADER */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    backdrop-filter: blur(18px);
+    background: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid rgba(229, 231, 235, 0.7);
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.logo-mark {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-mark img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+}
+
+.logo-text {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--text-main);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+nav a {
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--text-muted);
+    padding: 6px 0;
+    position: relative;
+    transition: color var(--transition-fast);
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-end));
+    transition: width var(--transition-fast);
+}
+
+nav a:hover {
+    color: var(--text-main);
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+.lang-switcher {
+    display: flex;
+    gap: 6px;
+    padding-left: 18px;
+    border-left: 1px solid rgba(209, 213, 219, 0.9);
+    align-items: center;
+}
+
+.lang-btn {
+    border: none;
+    background: transparent;
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    cursor: pointer;
+    color: var(--text-muted);
+    font-weight: 500;
+    transition: background var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast), transform 0.1s ease-out;
+}
+
+.lang-btn.active {
+    background: linear-gradient(135deg, var(--primary), var(--primary-end));
+    color: #ffffff;
+    box-shadow: 0 8px 22px rgba(249, 115, 22, 0.35);
+    transform: translateY(-1px);
+}
+
+.lang-btn:hover:not(.active) {
+    background: rgba(249, 115, 22, 0.08);
+}
+
+/* HERO */
+
+.hero {
+    padding: 40px 0 48px;
+}
+
+.hero-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 40px;
+    align-items: center;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(249, 115, 22, 0.08);
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: radial-gradient(circle, #22c55e 0, #16a34a 50%, #15803d 100%);
+    box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.3);
+}
+
+.hero-title {
+    font-size: clamp(28px, 4vw, 36px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 12px;
+}
+
+.hero-title span {
+    background: linear-gradient(135deg, var(--primary), var(--primary-end));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero-subtitle {
+    font-size: 15px;
+    color: var(--text-muted);
+    max-width: 520px;
+    margin-bottom: 22px;
+}
+
+.hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.btn-primary {
+    border-radius: 999px;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--primary), var(--primary-end));
+    box-shadow: 0 16px 32px rgba(249, 115, 22, 0.4);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.12s ease-out, box-shadow 0.12s ease-out, filter var(--transition-fast);
+    text-decoration: none;
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.03);
+    box-shadow: 0 20px 40px rgba(249, 115, 22, 0.5);
+}
+
+.btn-ghost {
+    border-radius: 999px;
+    border: 1px solid rgba(209, 213, 219, 0.9);
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 500;
+    background: #ffffff;
+    color: var(--text-main);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: background var(--transition-fast), border-color var(--transition-fast), transform 0.12s ease-out, box-shadow 0.12s ease-out;
+}
+
+.btn-ghost:hover {
+    background: var(--bg-soft);
+    border-color: rgba(156, 163, 175, 0.8);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+}
+
+.hero-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hero-note-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.hero-visual {
+    justify-self: end;
+    max-width: 380px;
+    width: 100%;
+}
+
+.hero-card {
+    border-radius: var(--radius-xl);
+    background: linear-gradient(145deg, #fff7ed, #ffffff);
+    box-shadow: var(--shadow-soft);
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-illust {
+    border-radius: 22px;
+    overflow: hidden;
+    background: #fed7aa;
+}
+
+.hero-illust img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.hero-tag {
+    position: absolute;
+    top: 14px;
+    left: 18px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 11px;
+    background: rgba(0, 0, 0, 0.55);
+    color: #ffffff;
+    backdrop-filter: blur(6px);
+}
+
+.hero-mini {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.hero-mini-left {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.hero-mini-left strong {
+    color: var(--text-main);
+}
+
+.hero-mini-stats {
+    display: flex;
+    gap: 10px;
+    font-size: 11px;
+}
+
+.pill {
+    border-radius: 999px;
+    padding: 6px 10px;
+    background: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 8px 16px rgba(15, 23, 42, 0.06);
+}
+
+.pill-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: radial-gradient(circle, #22c55e 0, #16a34a 50%, #15803d 100%);
+}
+
+/* SECTIONS */
+
+section {
+    padding: 32px 0;
+}
+
+.section-header {
+    margin-bottom: 20px;
+}
+
+.section-kicker {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--primary);
+    margin-bottom: 6px;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.section-subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    max-width: 520px;
+}
+
+.problem-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.card {
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-soft);
+    background: #ffffff;
+    padding: 18px 18px 16px;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.04);
+}
+
+.card-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.card-title span {
+    font-size: 20px;
+}
+
+.card ul {
+    list-style: none;
+    padding-left: 0;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.card ul li {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.bullet {
+    margin-top: 6px;
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(148, 163, 184, 0.9);
+    flex-shrink: 0;
+}
+
+.bullet.good {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+/* TEAM */
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.team-card {
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-soft);
+    background: #ffffff;
+    padding: 14px 14px 12px;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+    font-size: 13px;
+}
+
+.team-role {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--primary);
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.team-name {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.team-desc {
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+.team-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.tag {
+    font-size: 11px;
+    border-radius: 999px;
+    padding: 4px 8px;
+    background: var(--bg-soft);
+    color: #374151;
+}
+
+.team-links {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.team-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.team-links a:hover {
+    color: var(--primary);
+}
+
+/* WHY US */
+
+.why-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: 20px;
+    align-items: center;
+}
+
+.why-card {
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-soft);
+    background: var(--primary-soft);
+    padding: 16px;
+}
+
+.why-card ul {
+    list-style: none;
+    padding-left: 0;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.why-card li {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.why-icon {
+    margin-top: 4px;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+/* ROADMAP */
+
+.roadmap-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.road-step {
+    border-radius: var(--radius-lg);
+    padding: 14px 12px;
+    background: #ffffff;
+    border: 1px solid var(--border-soft);
+    font-size: 12px;
+}
+
+.road-step-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--primary);
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.road-step-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.road-step p {
+    color: var(--text-muted);
+}
+
+/* IMPLEMENTATION */
+
+.impl-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    font-size: 13px;
+}
+
+.impl-card ul {
+    list-style: none;
+    padding-left: 0;
+    color: var(--text-muted);
+}
+
+.impl-card li {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+/* FOOTER */
+
+footer {
+    border-top: 1px solid var(--border-soft);
+    padding: 18px 0 22px;
+    margin-top: 18px;
+    background: #ffffff;
+}
+
+.footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.footer-inner span strong {
+    color: var(--text-main);
+}
+
+@media (max-width: 980px) {
+    .hero-inner {
+        grid-template-columns: minmax(0, 1.2fr);
+    }
+
+    .hero-visual {
+        max-width: 100%;
+        justify-self: stretch;
+        order: -1;
+    }
+
+    .roadmap-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .team-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .impl-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .why-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 720px) {
+    .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    nav {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .lang-switcher {
+        border-left: none;
+        padding-left: 0;
+    }
+
+    .hero {
+        padding-top: 26px;
+    }
+
+    .problem-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .team-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .impl-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .roadmap-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+<div class="container header-inner">
+<div class="logo">
+<div class="logo-mark">
+<img src="IMG_9633 (3).PNG" alt="Bozorlik AI logo">
+</div>
+<div class="logo-text">Bozorlik AI</div>
+</div>
+<nav>
+<a href="#problem" data-i18n="nav.problem">Проблема → Решение</a>
+<a href="#team" data-i18n="nav.team">Команда</a>
+<a href="#why" data-i18n="nav.why">Почему мы</a>
+<a href="#roadmap" data-i18n="nav.roadmap">Дорожная карта</a>
+<a href="#implementation" data-i18n="nav.implementation">Реализация</a>
+<div class="lang-switcher">
+<button class="lang-btn active" data-lang="uz">UZ</button>
+<button class="lang-btn" data-lang="ru">RU</button>
+<button class="lang-btn" data-lang="en">EN</button>
+</div>
+</nav>
+</div>
+</header>
+<main>
+<section class="hero">
+<div class="container hero-inner">
+<div class="hero-content">
+<h1 class="hero-title">
+<span>Bozorlik AI</span>
+<br>
+<span data-i18n="hero.title">aqlli xaridlar uchun AI yordamchi</span>
+</h1>
+<p class="hero-subtitle" data-i18n="hero.subtitle">Matn yoki ovozdan ro'yxat tuzadigan, xarajatlarni hisoblaydigan va butun oilaga qulay bo'lgan bozorlik asistenti.</p>
+<div class="hero-actions">
+<a href="https://t.me/BozorlikAI_bot" target="_blank" class="btn-primary" data-i18n="hero.ctaDemo">Ko'rsatma / Demo</a>
+<a href="#implementation" class="btn-ghost" data-i18n="hero.ctaMore">Qanday ishlaydi</a>
+</div>
+</div>
+<div class="hero-visual">
+<div class="hero-card">
+<div class="hero-illust">
+<img src="mascot.png" alt="Uzbek shopper using Bozorlik AI">
+<div class="hero-tag" data-i18n="hero.tag">«Bozorlik ro'yxatni AIga topshirib qo'ying»</div>
+</div>
+<div class="hero-mini">
+<div class="hero-mini-left">
+<strong data-i18n="hero.miniTitle">Toshkent bozorlariga moslashtirilgan</strong>
+<br>
+<span data-i18n="hero.miniText">Mahalliy narxlar, kategoriyalar va bozorlar xaritasi.</span>
+</div>
+<div class="hero-mini-stats">
+<div class="pill">
+<span class="pill-dot"></span>
+<span data-i18n="hero.pill1">AI xarajat nazorati</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem">
+<div class="container">
+<div class="section-header">
+<div class="section-kicker" data-i18n="section.problem.kicker">01 — muammo va yechim</div>
+<h2 class="section-title" data-i18n="section.problem.title">Проблема → Решение</h2>
+<p class="section-subtitle" data-i18n="section.problem.subtitle">Biz ko'p uchraydigan kundalik bozorlik muammolarini tahlil qildik va ular uchun AI yordamida ishlaydigan yechim taklif qilamiz.</p>
+</div>
+<div class="problem-grid">
+<div class="card">
+<div class="card-title">
+<span>⚠️</span>
+<span data-i18n="problem.cardTitle">Проблемы пользователей</span>
+</div>
+<ul>
+<li><span class="bullet"></span><span data-i18n="problem.p1">Ручное составление списков занимает много времени и сил.</span></li>
+<li><span class="bullet"></span><span data-i18n="problem.p2">Списки хаотичные: ничего не отсортировано по категориям базара.</span></li>
+<li><span class="bullet"></span><span data-i18n="problem.p3">Сложно контролировать бюджет и помнить итоговую сумму покупок.</span></li>
+<li><span class="bullet"></span><span data-i18n="problem.p4">Семье неудобно вести общий список: нет истории, аналитики и коллаборации.</span></li>
+</ul>
+</div>
+<div class="card">
+<div class="card-title">
+<span>✅</span>
+<span data-i18n="solution.cardTitle">Решение — Bozorlik AI</span>
+</div>
+<ul>
+<li><span class="bullet good"></span><span data-i18n="solution.s1">Автоматическое создание списка из текста или голосового сообщения.</span></li>
+<li><span class="bullet good"></span><span data-i18n="solution.s2">Умная сортировка по категориям: овощи, мясо, молочка, бакалея и т.д.</span></li>
+<li><span class="bullet good"></span><span data-i18n="solution.s3">Учёт расходов голосом: «pomidor — 12 000» → бот считает общую сумму.</span></li>
+<li><span class="bullet good"></span><span data-i18n="solution.s4">История списков, аналитика по тратам и повторение лучших сценариев закупки.</span></li>
+<li><span class="bullet good"></span><span data-i18n="solution.s5">Полностью платный сервис с подпиской: Click, Payme и Telegram Stars.</span></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="team">
+<div class="container">
+<div class="section-header">
+<div class="section-kicker" data-i18n="section.team.kicker">02 — jamoa</div>
+<h2 class="section-title" data-i18n="section.team.title">Команда</h2>
+<p class="section-subtitle" data-i18n="section.team.subtitle">Bizning jamoa mahsulot fikrlash, AI, backend, dizayn va loyiha boshqaruvini birlashtiradi.</p>
+</div>
+<div class="team-grid">
+<div class="team-card">
+<div class="team-role" data-i18n="team.m1.role">CEO / Product Manager</div>
+<div class="team-name" data-i18n="team.m1.name">Тожиев Самир</div>
+<p class="team-desc" data-i18n="team.m1.desc">Product vision, Managment, Agile & Scrum, UX, Git, JSON</p>
+<div class="team-tags">
+<span class="tag">Python</span>
+<span class="tag">Aiogram</span>
+<span class="tag">OpenAI API</span>
+<span class="tag">Whisper</span>
+</div>
+<div class="team-links">
+<a href="https://t.me/stdxrk" target="_blank">Telegram</a> · 
+<a href="https://github.com/stdxrk" target="_blank">GitHub</a> · 
+<a href="https://www.instagram.com/stdxrk" target="_blank">Instagram</a>
+</div>
+</div>
+<div class="team-card">
+<div class="team-role" data-i18n="team.m2.role">COO / PM Assistant</div>
+<div class="team-name" data-i18n="team.m2.name">Усмонов Умид</div>
+<p class="team-desc" data-i18n="team.m2.desc">Python, AI, Java, Product Management</p>
+<div class="team-tags">
+<span class="tag">Python</span>
+<span class="tag">Java</span>
+<span class="tag">Gemini</span>
+</div>
+<div class="team-links">
+<a href="https://t.me/umidusmonov1" target="_blank">Telegram</a> · 
+<a href="https://github.com/Um1d13" target="_blank">GitHub</a> · 
+<a href="https://www.linkedin.com/in/%D1%83%D0%BC%D0%B8%D0%B4-%D1%83%D1%81%D0%BC%D0%BE%D0%BD%D0%BE%D0%B2-4aa751308/" target="_blank">LinkedIn</a>
+</div>
+</div>
+<div class="team-card">
+<div class="team-role" data-i18n="team.m3.role">Frontend Developer / Cybersecurity</div>
+<div class="team-name" data-i18n="team.m3.name">Якубов Отабек</div>
+<p class="team-desc" data-i18n="team.m3.desc">Защита веб-сайтов, Создание визуального интерфейса</p>
+<div class="team-tags">
+<span class="tag">HTML/CSS</span>
+<span class="tag">JavaScript</span>
+<span class="tag">Python</span>
+</div>
+<div class="team-links">
+<a href="https://t.me/YaKuBoV06_99" target="_blank">Telegram</a> · 
+<a href="https://github.com/YaKuBoVO" target="_blank">GitHub</a> · 
+<a href="https://www.linkedin.com/in/otabek-yakubov-a68007197" target="_blank">LinkedIn</a>
+</div>
+</div>
+<div class="team-card">
+<div class="team-role" data-i18n="team.m4.role">Backend Developer</div>
+<div class="team-name" data-i18n="team.m4.name">Махсетов Асад</div>
+<p class="team-desc" data-i18n="team.m4.desc">UX, Python, Backend Development</p>
+<div class="team-tags">
+<span class="tag">Python</span>
+<span class="tag">Aiogram</span>
+<span class="tag">FlaskAPI</span>
+<span class="tag">Django</span>
+</div>
+<div class="team-links">
+<a href="https://t.me/asadmaxsetov" target="_blank">Telegram</a> · 
+<a href="https://github.com/Assa1d" target="_blank">GitHub</a> · 
+<a href="https://www.linkedin.com/in/asadbek-maxsetov-40599138a/" target="_blank">LinkedIn</a>
+</div>
+</div>
+<div class="team-card">
+<div class="team-role" data-i18n="team.m5.role">Backend Developer</div>
+<div class="team-name" data-i18n="team.m5.name">Куранбоев Ферузбек</div>
+<p class="team-desc" data-i18n="team.m5.desc">C#, .NET, Python, SQL, Git, Testing, Deployment</p>
+<div class="team-tags">
+<span class="tag">.NET</span>
+<span class="tag">SQL</span>
+<span class="tag">Django</span>
+<span class="tag">LLM</span>
+</div>
+<div class="team-links">
+<a href="https://t.me/Feruzbek_nk" target="_blank">Telegram</a> · 
+<a href="https://github.com/codeDriven18" target="_blank">GitHub</a> · 
+<a href="https://www.linkedin.com/in/feruzbek" target="_blank">LinkedIn</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="why">
+<div class="container">
+<div class="section-header">
+<div class="section-kicker" data-i18n="section.why.kicker">03 — nega aynan biz</div>
+<h2 class="section-title" data-i18n="section.why.title">Почему наша команда способна решить задачу</h2>
+<p class="section-subtitle" data-i18n="section.why.subtitle">Biz allaqachon Telegram-botlar, GPT, Whisper va haqiqiy foydalanuvchi senariylari bilan ishlaganmiz.</p>
+</div>
+<div class="why-grid">
+<div class="why-card">
+<ul>
+<li><span class="why-icon">🧠</span><span data-i18n="why.w1">Опыт создания ботов с GPT и Whisper: от идеи до запуска и первых пользователей.</span></li>
+<li><span class="why-icon">🛠️</span><span data-i18n="why.w2">Полный стек в команде: продукт, AI, backend, дизайн, контент и тестирование.</span></li>
+<li><span class="why-icon">⚡</span><span data-i18n="why.w3">Чёткий roadmap и понимание монетизации через подписки и Telegram Stars.</span></li>
+</ul>
+</div>
+<div class="card">
+<div class="card-title">
+<span>📱</span>
+<span data-i18n="why.sideTitle">Фокус на реальной пользе</span>
+</div>
+<p style="font-size:13px;color:var(--text-muted);" data-i18n="why.sideText">Bozorlik AI создаётся не как абстрактный pet-проект, а как сервис, который должен стать ежедневным помощником семей, студентов и фрилансеров в Узбекистане и за его пределами.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="roadmap">
+<div class="container">
+<div class="section-header">
+<div class="section-kicker" data-i18n="section.roadmap.kicker">04 — roadmap</div>
+<h2 class="section-title" data-i18n="section.roadmap.title">Дорожная карта: Idea → Prototype → MVP → Launched</h2>
+<p class="section-subtitle" data-i18n="section.roadmap.subtitle">Bozorlik AI bosqichma-bosqich rivojlanadi: avval konsepsiya, so'ng MVP, keyin esa to'liq ishga tushirish va kengaytirish.</p>
+</div>
+<div class="roadmap-grid">
+<div class="road-step">
+<div class="road-step-label" data-i18n="road.idea.label">bosqich 1</div>
+<div class="road-step-title" data-i18n="road.idea.title">Idea</div>
+<p data-i18n="road.idea.text">Analiz пользовательских болей, концепция Bozorlik AI, прототип логики категорий и пользовательских сценариев.</p>
+</div>
+<div class="road-step">
+<div class="road-step-label" data-i18n="road.prototype.label">bosqich 2</div>
+<div class="road-step-title" data-i18n="road.prototype.title">Prototype</div>
+<p data-i18n="road.prototype.text">Integratsiya GPT+Whisper, birinchi Telegram-bot, kategoriyalar va xarajatlar hisobini test guruhida sinash.</p>
+</div>
+<div class="road-step">
+<div class="road-step-label" data-i18n="road.mvp.label">bosqich 3</div>
+<div class="road-step-title" data-i18n="road.mvp.title">MVP</div>
+<p data-i18n="road.mvp.text">История списков, RU/UZ qo'llab-quvvatlash, budjet rejimi, bozorlar xaritasi, oilaviy ro'yxatlar va analitika.</p>
+</div>
+<div class="road-step">
+<div class="road-step-label" data-i18n="road.launch.label">bosqich 4</div>
+<div class="road-step-title" data-i18n="road.launch.title">Launched</div>
+<p data-i18n="road.launch.text">Ommaviy reliz, marketing, mobil ilovalar (iOS/Android) va bozorlar/marketpleyslar bilan hamkorlik.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="implementation">
+<div class="container">
+<div class="section-header">
+<div class="section-kicker" data-i18n="section.impl.kicker">05 — texnik reja</div>
+<h2 class="section-title" data-i18n="section.impl.title">Как мы планируем реализовать решение</h2>
+<p class="section-subtitle" data-i18n="section.impl.subtitle">Texnologiyalar, AI-instrumentlar va bosqichlar AI500 mezonlari bilan mos holda rejalashtirilgan.</p>
+</div>
+<div class="impl-grid">
+<div class="card impl-card">
+<div class="card-title">
+<span>🛠️</span>
+<span data-i18n="impl.techTitle">Технологии</span>
+</div>
+<ul>
+<li><span class="bullet"></span><span data-i18n="impl.t1">Python+Aiogram — Telegram-bot va backend logikasi.</span></li>
+<li><span class="bullet"></span><span data-i18n="impl.t2">GPT API — ro'yxatlar tahlili, kategoriyalash va tavsiyalar.</span></li>
+<li><span class="bullet"></span><span data-i18n="impl.t3">Whisper-1 — ovozli ro'yxat va narxlarni matnga aylantirish.</span></li>
+<li><span class="bullet"></span><span data-i18n="impl.t4">PostgreSQL / SQLite / JSON — ma'lumotlar saqlash va analitika.</span></li>
+<li><span class="bullet"></span><span data-i18n="impl.t5">HTML/CSS — ushbu demo-sayt va bozorlik UI konsepti.</span></li>
+</ul>
+</div>
+<div class="card impl-card">
+<div class="card-title">
+<span>🤖</span>
+<span data-i18n="impl.aiTitle">ИИ-инструменты</span>
+</div>
+<ul>
+<li><span class="bullet good"></span><span data-i18n="impl.a1">Whisper — пользователи gapiradi, tizim ro'yxat va summalarni yozib boradi.</span></li>
+<li><span class="bullet good"></span><span data-i18n="impl.a2">GPT — mahsulotlarni kategoriyalar bo'yicha ajratadi va tavsiyalar beradi.</span></li>
+<li><span class="bullet good"></span><span data-i18n="impl.a3">Analitika moduli — oxirgi 10 ro'yxat asosida takroriy va optimal xaridlarni taklif qiladi.</span></li>
+</ul>
+</div>
+<div class="card impl-card">
+<div class="card-title">
+<span>📈</span>
+<span data-i18n="impl.stepsTitle">Этапы разработки</span>
+</div>
+<ul>
+<li><span class="bullet"></span><span data-i18n="impl.s1">Talablarni yig'ish, UX-ssenariylar va AI-promptlarni ishlab chiqish.</span></li>
+<li><span class="bullet"></span><span data-i18n="impl.s2">Backend va AI integratsiya: ro'yxat, byudjet, tarix va analitika.</span></li>
+<li><span class="bullet"></span><span data-i18n="impl.s3">To'lov tizimlari (Click, Payme, Telegram Stars) va obuna modellari.</span></li>
+<li><span class="bullet"></span><span data-i18n="impl.s4">Testlash, foydalanuvchilar feedbacki va iteratsional yaxshilash.</span></li>
+<li><span class="bullet"></span><span data-i18n="impl.s5">Mobil ilovalar va mintaqaviy bozorga chiqish (O'zbekiston → СНГ).</span></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container footer-inner">
+<span data-i18n="footer.copy">© 2025 Bozorlik AI. AI yordamida aqlli xaridlar.</span>
+<span data-i18n="footer.note">Demo-sayt AI500 Stage 1 uchun tayyorlangan.</span>
+</div>
+</footer>
+</div>
+<script>
+const translations = {
+    uz: {
+        "nav.problem": "Muammo → Yechim",
+        "nav.team": "Jamoa",
+        "nav.why": "Nega biz",
+        "nav.roadmap": "Roadmap",
+        "nav.implementation": "Rejalashtirish",
+
+        "hero.title": "aqlli xaridlar uchun AI yordamchi",
+        "hero.subtitle": "Matn yoki ovozdan ro'yxat tuzadigan, xarajatlarni hisoblaydigan va butun oilaga qulay bo'lgan bozorlik asistenti.",
+        "hero.ctaDemo": "Demo va konsepsiya",
+        "hero.ctaMore": "Qanday ishlaydi",
+        "hero.tag": "«Bozorlik ro'yxatini AIga topshiring»",
+        "hero.miniTitle": "Toshkent bozorlariga moslashtirilgan",
+        "hero.miniText": "Mahalliy narxlar, kategoriyalar va bozorlar xaritasi.",
+        "hero.pill1": "AI xarajat nazorati",
+
+        "section.problem.kicker": "01 — muammo va yechim",
+        "section.problem.title": "Muammo → Yechim",
+        "section.problem.subtitle": "Biz kundalik bozorlikdagi asosiy og'riqlarni tahlil qilib, ular uchun AI asosidagi yechim taklif qilamiz.",
+
+        "problem.cardTitle": "Foydalanuvchi muammolari",
+        "problem.p1": "Ro'yxatni qo'lda tuzish ko'p vaqt va energiya oladi.",
+        "problem.p2": "Ro'yxat tartibsiz, bozor kategoriyalariga ajratilmagan.",
+        "problem.p3": "Budjetni nazorat qilish va umumiy summani eslab qolish qiyin.",
+        "problem.p4": "Oila uchun umumiy ro'yxat yuritish noqulay: tarix va analitika yo'q.",
+
+        "solution.cardTitle": "Yechim — Bozorlik AI",
+        "solution.s1": "Matn yoki ovozdan avtomatik bozorlik ro'yxati yaratish.",
+        "solution.s2": "Mahsulotlarni kategoriya bo'yicha aqlli tartiblash.",
+        "solution.s3": "Ovoz orqali kiritilgan narxlar asosida umumiy summani hisoblash.",
+        "solution.s4": "Ro'yxatlar tarixi, xarajatlar statistikasi va qayta tavsiyalar.",
+        "solution.s5": "To'liq pullik servis: Click, Payme va Telegram Stars orqali obuna.",
+
+        "section.team.kicker": "02 — jamoa",
+        "section.team.title": "Jamoa",
+        "section.team.subtitle": "Bizning jamoa mahsulot, AI, backend, dizayn va loyiha boshqaruvi tajribasini birlashtiradi.",
+
+        "team.m1.role": "CEO / Product Manager",
+        "team.m1.name": "Tojiyev Samir",
+        "team.m1.desc": "Product vision, Managment, Agile & Scrum, UX, Git, JSON",
+        "team.m1.links": "Telegram · GitHub · Instagram",
+
+        "team.m2.role": "COO / PM Assistant",
+        "team.m2.name": "Usmonov Umid",
+        "team.m2.desc": "Python, AI, Java, Product Management",
+        "team.m2.links": "Telegram · GitHub · LinkedIn",
+
+        "team.m3.role": "Frontend Developer / Cybersecurity",
+        "team.m3.name": "Yakubov Otabek",
+        "team.m3.desc": "Veb-saytlarni himoya qilish, Vizual interfeys yaratish",
+        "team.m3.links": "Telegram · GitHub · LinkedIn",
+
+        "team.m4.role": "Backend Developer",
+        "team.m4.name": "Makhsetov Asad",
+        "team.m4.desc": "UX, Python, Backend Development",
+        "team.m4.links": "Telegram · GitHub · LinkedIn",
+
+        "team.m5.role": "Backend Developer",
+        "team.m5.name": "Quranboyev Feruzbek",
+        "team.m5.desc": "C#, .NET, Python, SQL, Git, Testing, Deployment",
+        "team.m5.links": "Telegram · GitHub · LinkedIn",
+
+        "section.why.kicker": "03 — nega aynan biz",
+        "section.why.title": "Nega biz bu vazifani bajara olamiz",
+        "section.why.subtitle": "Biz avval ham GPT, Whisper va Telegram-botlar bilan real foydalanuvchilar uchun yechimlar yaratganmiz.",
+        "why.w1": "GPT va Whisper asosida ishlab turgan botlar tajribamiz bor.",
+        "why.w2": "Jamoada mahsulot, AI, backend, dizayn va QA rollari yopilgan.",
+        "why.w3": "Monetizatsiya va obuna modellarini boshidan rejalashtiramiz.",
+        "why.sideTitle": "Asosiy maqsad — real foyda",
+        "why.sideText": "Bozorlik AI bozordagi xaridlar ro‘yxatini tez tuzish va byudjetni samarali boshqarishda yordam beradigan mahsulot sifatida yaratilmoqda",
+
+        "section.roadmap.kicker": "04 — roadmap",
+        "section.roadmap.title": "Roadmap: Idea → Prototype → MVP → Launched",
+        "section.roadmap.subtitle": "Bozorlik AI konsepsiyadan ishlab chiqarishgacha bo'lgan aniq bosqichlarga ega.",
+
+        "road.idea.label": "bosqich 1",
+        "road.idea.title": "Idea",
+        "road.idea.text": "Foydalanuvchi og'riqlarini tahlil qilish, asosiy konsepsiya va senariylarni ishlab chiqish.",
+        "road.prototype.label": "bosqich 2",
+        "road.prototype.title": "Prototype",
+        "road.prototype.text": "GPT + Whisper integratsiyasi, birinchi bot va kichik test guruhi bilan tajriba.",
+        "road.mvp.label": "bosqich 3",
+        "road.mvp.title": "MVP",
+        "road.mvp.text": "Tarix, RU/UZ, budjet rejimi, bozorlar xaritasi va analitika funksiyalarini qo'shish.",
+        "road.launch.label": "bosqich 4",
+        "road.launch.title": "Launched",
+        "road.launch.text": "Ommaviy reliz, marketing, mobil ilovalar va hamkorliklarni yo'lga qo'yish.",
+
+        "section.impl.kicker": "05 — texnik reja",
+        "section.impl.title": "Yechimni qanday amalga oshiramiz",
+        "section.impl.subtitle": "Texnologiyalar, AI instrumentlar va bosqichlar AI500 mezonlariga mos tarzda rejalashtirilgan.",
+        "impl.techTitle": "Texnologiyalar",
+        "impl.t1": "Python + Aiogram — Telegram-bot va backend logikasi.",
+        "impl.t2": "GPT API — ro'yxat tahlili, kategoriyalash va tavsiyalar.",
+        "impl.t3": "Whisper-1 — ovozni matnga aylantirish (ro'yxatlar, narxlar).",
+        "impl.t4": "PostgreSQL / SQLite / JSON — ma'lumotlar saqlash va analitika.",
+        "impl.t5": "HTML/CSS — demo-sayt va UI konsepsiyasi.",
+        "impl.aiTitle": "AI instrumentlar",
+        "impl.a1": "Whisper — foydalanuvchi gapiradi, tizim ro'yxat va summalarni yozib boradi.",
+        "impl.a2": "GPT — mahsulotlarni kategoriyalar bo'yicha ajratadi va tavsiya beradi.",
+        "impl.a3": "Analitika moduli — oxirgi ro'yxatlar asosida optimallashtirilgan bozorlikni taklif qiladi.",
+        "impl.stepsTitle": "Ish bosqichlari",
+        "impl.s1": "Talablarni yig'ish, UX ssenariylar va AI promptlarni ishlab chiqish.",
+        "impl.s2": "Backend va AI integratsiya: ro'yxat, budjet, tarix va analitika.",
+        "impl.s3": "To'lov tizimlari va obuna rejalarini joriy qilish.",
+        "impl.s4": "Testlash va foydalanuvchi fikr-mulohazalari asosida iteratsiyalar.",
+        "impl.s5": "Mobil ilovalar va mintaqaviy bozorga chiqish.",
+
+        "footer.copy": "© 2025 Bozorlik AI. AI yordamida aqlli xaridlar.",
+        "footer.note": "Support: bozorlikai@gmail.com"
+    },
+    ru: {
+        "nav.problem": "Проблема → Решение",
+        "nav.team": "Команда",
+        "nav.why": "Почему мы",
+        "nav.roadmap": "Дорожная карта",
+        "nav.implementation": "Реализация",
+
+        "hero.title": "AI-помощник для умных покупок",
+        "hero.subtitle": "Bozorlik AI автоматизирует списки покупок, считает расходы и помогает всей семье планировать базар с комфортом.",
+        "hero.ctaDemo": "Посмотреть демо",
+        "hero.ctaMore": "Как это работает",
+        "hero.tag": "«Составьте список и бюджет вместе с ИИ»",
+        "hero.miniTitle": "Заточен под рынки Ташкента",
+        "hero.miniText": "Локальные категории, товары и логика поведения пользователей.",
+        "hero.pill1": "Контроль расходов",
+
+        "section.problem.kicker": "01 — проблема и решение",
+        "section.problem.title": "Проблема → Решение",
+        "section.problem.subtitle": "Мы описали ключевые боли пользователей при походе на базар и показали, как Bozorlik AI их закрывает.",
+
+        "problem.cardTitle": "Проблемы пользователей",
+        "problem.p1": "Составление списков вручную занимает много времени.",
+        "problem.p2": "Списки несортированные, нет структуры по категориям базара.",
+        "problem.p3": "Сложно контролировать бюджет и помнить итоговую сумму покупок.",
+        "problem.p4": "Невозможно удобно вести общий семейный список и аналитику расходов.",
+
+        "solution.cardTitle": "Решение — Bozorlik AI",
+        "solution.s1": "Автоматическое создание списка из текста или голосового сообщения.",
+        "solution.s2": "Умная сортировка по категориям: овощи, мясо, молочка, бакалея и др.",
+        "solution.s3": "Учёт расходов голосом: «огурцы — 12 000» → бот считает сумму.",
+        "solution.s4": "История списков, аналитика, повторение оптимальных сценариев покупок.",
+        "solution.s5": "Подписочная модель: Click, Payme и Telegram Stars.",
+
+        "section.team.kicker": "02 — команда",
+        "section.team.title": "Команда",
+        "section.team.subtitle": "Наша команда закрывает продуктовую экспертизу, AI, backend, дизайн и управление разработкой.",
+
+        "team.m1.role": "CEO / Product Manager",
+        "team.m1.name": "Тожиев Самир",
+        "team.m1.desc": "Product vision, Managment, Agile & Scrum, UX, Git, JSON",
+        "team.m1.links": "Telegram · GitHub · Instagram",
+
+        "team.m2.role": "COO / PM Assistant",
+        "team.m2.name": "Усмонов Умид",
+        "team.m2.desc": "Python, AI, Java, Product Management",
+        "team.m2.links": "Telegram · GitHub · LinkedIn",
+
+        "team.m3.role": "Frontend Developer / Cybersecurity",
+        "team.m3.name": "Якубов Отабек",
+        "team.m3.desc": "Защита веб-сайтов, Создание визуального интерфейса",
+        "team.m3.links": "Telegram · GitHub · LinkedIn",
+
+        "team.m4.role": "Backend Developer",
+        "team.m4.name": "Махсетов Асад",
+        "team.m4.desc": "UX, Python, Backend Development",
+        "team.m4.links": "Telegram · GitHub · LinkedIn",
+
+        "team.m5.role": "Backend Developer",
+        "team.m5.name": "Куранбоев Ферузбек",
+        "team.m5.desc": "C#, .NET, Python, SQL, Git, Testing, Deployment",
+        "team.m5.links": "Telegram · GitHub · LinkedIn",
+
+        "section.why.kicker": "03 — почему мы",
+        "section.why.title": "Почему наша команда справится",
+        "section.why.subtitle": "У нас есть живой опыт разработки Telegram-ботов, интеграции GPT и Whisper и работы с реальными пользователями.",
+        "why.w1": "Опыт создания AI-ботов на базе GPT и Whisper.",
+        "why.w2": "Полный стек в команде: продукт, AI, backend, дизайн, контент и тестирование.",
+        "why.w3": "Понимание монетизации через подписки и Telegram Stars.",
+        "why.sideTitle": "Фокус на реальной пользе",
+        "why.sideText": "Bozorlik AI создаётся как продукт, который помогает людям быстро составлять список базара и эффективно управлять бюджетом",
+
+        "section.roadmap.kicker": "04 — roadmap",
+        "section.roadmap.title": "Дорожная карта: Idea → Prototype → MVP → Launched",
+        "section.roadmap.subtitle": "Пошаговый план движения от гипотез до полноценного продукта.",
+
+        "road.idea.label": "этап 1",
+        "road.idea.title": "Idea",
+        "road.idea.text": "Сбор инсайтов, описание болей, формулировка гипотез и ключевых сценариев.",
+        "road.prototype.label": "этап 2",
+        "road.prototype.title": "Prototype",
+        "road.prototype.text": "Интеграция GPT + Whisper, первый Telegram-бот, тестирование на небольшой группе.",
+        "road.mvp.label": "этап 3",
+        "road.mvp.title": "MVP",
+        "road.mvp.text": "История списков, RU/UZ, бюджетный режим, карта базаров и аналитика.",
+        "road.launch.label": "этап 4",
+        "road.launch.title": "Launched",
+        "road.launch.text": "Публичный релиз, маркетинг, мобильные приложения и партнёрства.",
+
+        "section.impl.kicker": "05 — техническая реализация",
+        "section.impl.title": "Как мы планируем реализовать решение",
+        "section.impl.subtitle": "Технологии, AI-инструменты и этапы разработки выстроены под критерии AI500.",
+        "impl.techTitle": "Технологии",
+        "impl.t1": "Python + Aiogram — основа Telegram-бота и бизнес-логики.",
+        "impl.t2": "GPT API — анализ списков, категоризация и рекомендации.",
+        "impl.t3": "Whisper-1 — распознавание голосовых списков и сумм.",
+        "impl.t4": "PostgreSQL / SQLite / JSON — хранение данных и аналитика.",
+        "impl.t5": "HTML/CSS — презентационный демо-сайт.",
+        "impl.aiTitle": "AI-инструменты",
+        "impl.a1": "Whisper — пользователи говорят, система фиксирует позиции и суммы.",
+        "impl.a2": "GPT — приводит список в порядок и рекомендует оптимальную корзину.",
+        "impl.a3": "Аналитика — анализ последних списков и рекомендация повторов.",
+        "impl.stepsTitle": "Этапы разработки",
+        "impl.s1": "Сбор требований, UX-сценарии, проработка промптов и архитектуры.",
+        "impl.s2": "AI + backend: списки, бюджет, история и аналитика.",
+        "impl.s3": "Интеграция платежей: Click, Payme, Telegram Stars.",
+        "impl.s4": "Тестирование, улучшения по фидбеку пользователей.",
+        "impl.s5": "Мобильные приложения и масштабирование на другие рынки.",
+
+        "footer.copy": "© 2025 Bozorlik AI. Умные покупки с помощь ИИ.",
+        "footer.note": "Тех.поддержка: bozorlikai@gmail.com"
+    },
+    en: {
+        "nav.problem": "Problem → Solution",
+        "nav.team": "Team",
+        "nav.why": "Why us",
+        "nav.roadmap": "Roadmap",
+        "nav.implementation": "Implementation",
+
+        "hero.title": "AI assistant for smarter shopping",
+        "hero.subtitle": "Bozorlik AI turns voice or text into structured shopping lists, tracks your expenses and helps your family plan market trips together.",
+        "hero.ctaDemo": "View demo",
+        "hero.ctaMore": "How it works",
+        "hero.tag": "“Let AI handle your shopping list and budget”",
+        "hero.miniTitle": "Tailored to Tashkent bazaars",
+        "hero.miniText": "Local categories, typical products and user behavior.",
+        "hero.pill1": "AI expense control",
+
+        "section.problem.kicker": "01 — problem & solution",
+        "section.problem.title": "Problem → Solution",
+        "section.problem.subtitle": "We describe the key pains of everyday shopping and show how Bozorlik AI solves them.",
+
+        "problem.cardTitle": "User problems",
+        "problem.p1": "Manual list creation takes too much time.",
+        "problem.p2": "Lists are messy and not grouped by market categories.",
+        "problem.p3": "Hard to control the budget and remember the final amount.",
+        "problem.p4": "No convenient way to share lists with the family and track history.",
+
+        "solution.cardTitle": "Solution — Bozorlik AI",
+        "solution.s1": "Automatic list creation from text or voice.",
+        "solution.s2": "Smart categorization: vegetables, meat, dairy, grocery etc.",
+        "solution.s3": "Voice-based expense tracking: “tomatoes — 12 000” → total sum is calculated.",
+        "solution.s4": "History, analytics and repeat of optimal shopping scenarios.",
+        "solution.s5": "Paid subscription with Click, Payme and Telegram Stars.",
+
+        "section.team.kicker": "02 — team",
+        "section.team.title": "Team",
+        "section.team.subtitle": "Our team combines product mindset, AI engineering, backend, design and project management.",
+
+        "team.m1.role": "CEO / Product Manager",
+        "team.m1.name": "Tojiyev Samir",
+        "team.m1.desc": "Product vision, Managment, Agile & Scrum, UX, Git, JSON",
+        "team.m1.links": "Telegram · GitHub · Instagram",
+
+        "team.m2.role": "COO / PM Assistant",
+        "team.m2.name": "Usmonov Umid",
+        "team.m2.desc": "Python, AI, Java, Product Management",
+        "team.m2.links": "Telegram · GitHub · LinkedIn",
+
+        "team.m3.role": "Frontend Developer / Cybersecurity",
+        "team.m3.name": "Yakubov Otabek",
+        "team.m3.desc": "Website protection, Visual interface creation",
+        "team.m3.links": "Telegram · GitHub · LinkedIn",
+
+        "team.m4.role": "Backend Developer",
+        "team.m4.name": "Makhsetov Asad",
+        "team.m4.desc": "UX, Python, Backend Development",
+        "team.m4.links": "Telegram · GitHub · LinkedIn",
+
+        "team.m5.role": "Backend Developer",
+        "team.m5.name": "Quranboyev Feruzbek",
+        "team.m5.desc": "C#, .NET, Python, SQL, Git, Testing, Deployment",
+        "team.m5.links": "Telegram · GitHub · LinkedIn",
+
+        "section.why.kicker": "03 — why us",
+        "section.why.title": "Why our team can deliver",
+        "section.why.subtitle": "We already have experience building Telegram bots with GPT and Whisper and working with real users.",
+        "why.w1": "Hands-on experience with GPT and Whisper based assistants.",
+        "why.w2": "Full-stack team: product, AI, backend, design, content and QA.",
+        "why.w3": "Clear plan for subscription-based monetization and Telegram Stars.",
+        "why.sideTitle": "Focused on real value",
+        "why.sideText": "Bozorlik AI is being created as a product that helps people quickly create their market shopping list and efficiently manage their budget",
+
+        "section.roadmap.kicker": "04 — roadmap",
+        "section.roadmap.title": "Roadmap: Idea → Prototype → MVP → Launched",
+        "section.roadmap.subtitle": "A step-by-step plan from hypothesis to a launched product.",
+
+        "road.idea.label": "stage 1",
+        "road.idea.title": "Idea",
+        "road.idea.text": "Research user pains, define hypotheses and key scenarios.",
+        "road.prototype.label": "stage 2",
+        "road.prototype.title": "Prototype",
+        "road.prototype.text": "Integrate GPT + Whisper, build first Telegram bot and test with a small group.",
+        "road.mvp.label": "stage 3",
+        "road.mvp.title": "MVP",
+        "road.mvp.text": "Add history, RU/UZ support, budget mode, bazaar map and analytics.",
+        "road.launch.label": "stage 4",
+        "road.launch.title": "Launched",
+        "road.launch.text": "Public launch, marketing, mobile apps and partnerships.",
+
+        "section.impl.kicker": "05 — technical plan",
+        "section.impl.title": "How we will implement the solution",
+        "section.impl.subtitle": "Technologies, AI tools and development stages aligned with AI500 criteria.",
+        "impl.techTitle": "Technologies",
+        "impl.t1": "Python + Aiogram to power the Telegram bot and business logic.",
+        "impl.t2": "GPT API for list analysis, categorization and recommendations.",
+        "impl.t3": "Whisper-1 for speech-to-text (lists and prices).",
+        "impl.t4": "PostgreSQL / SQLite / JSON for data storage and analytics.",
+        "impl.t5": "HTML/CSS for this demo landing page.",
+        "impl.aiTitle": "AI tools",
+        "impl.a1": "Whisper — users speak, the system records items and sums.",
+        "impl.a2": "GPT — cleans and structures the list, suggests improvements.",
+        "impl.a3": "Analytics — analyzes past lists and suggests repeats.",
+        "impl.stepsTitle": "Development stages",
+        "impl.s1": "Collect requirements, design UX scenarios and prompts.",
+        "impl.s2": "Implement AI + backend: lists, budget, history and analytics.",
+        "impl.s3": "Integrate payments: Click, Payme, Telegram Stars.",
+        "impl.s4": "Testing, feedback-driven improvements.",
+        "impl.s5": "Mobile apps and expansion to new markets.",
+
+        "footer.copy": "© 2025 Bozorlik AI. Smart shopping powered by AI.",
+        "footer.note": "Support: bozorlikai@gmail.com"
+    }
+};
+
+function setLanguage(lang) {
+    document.documentElement.lang = lang;
+    const dict = translations[lang] || translations["uz"];
+
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key]) el.textContent = dict[key];
+    });
+
+    document.querySelectorAll(".lang-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.lang === lang);
+    });
+}
+
+document.querySelectorAll(".lang-btn").forEach(btn => {
+    btn.addEventListener("click", () => setLanguage(btn.dataset.lang));
+});
+
+setLanguage("uz");
+</script>
+</body>
+</html>
