@@ -15,9 +15,10 @@ from dotenv import load_dotenv
 
 logging.basicConfig(level=logging.INFO)
 
+load_dotenv()  # load .env first
+
 TOKEN = os.getenv("TOKEN")
-load_dotenv()
-api_key = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
