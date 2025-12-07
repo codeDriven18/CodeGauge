@@ -9,13 +9,12 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.utils import executor
 from aiogram.types import ContentType, InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.types import ReplyKeyboardRemove
-
-import os
 from dotenv import load_dotenv
 
 logging.basicConfig(level=logging.INFO)
 
-load_dotenv()  # load .env first
+# Load environment variables
+load_dotenv()
 
 TOKEN = os.getenv("TOKEN")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")

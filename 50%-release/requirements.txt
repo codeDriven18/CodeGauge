@@ -1,0 +1,22 @@
+# Telegram Bot Dependencies
+aiogram==2.25.1
+aiohttp==3.9.1
+
+# OpenAI API
+openai==1.6.1
+
+# Web Backend (Chatbot)
+flask==3.0.0
+flask-cors==4.0.0
+
+# HTTP Requests
+requests==2.31.0
+
+# Environment Variables
+python-dotenv==1.0.0
+
+# Async Support
+asyncio==3.4.3
+
+# Typing Support (Python 3.8+)
+typing-extensions==4.9.0
