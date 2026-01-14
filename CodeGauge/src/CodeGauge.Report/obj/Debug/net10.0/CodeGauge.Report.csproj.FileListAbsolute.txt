@@ -1,0 +1,16 @@
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Report\obj\Debug\net10.0\CodeGauge.Report.GeneratedMSBuildEditorConfig.editorconfig
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Report\obj\Debug\net10.0\CodeGauge.Report.AssemblyInfoInputs.cache
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Report\obj\Debug\net10.0\CodeGauge.Report.AssemblyInfo.cs
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Report\obj\Debug\net10.0\CodeGauge.Report.csproj.CoreCompileInputs.cache
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Report\obj\Debug\net10.0\CodeGauge.Report.sourcelink.json
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Report\bin\Debug\net10.0\CodeGauge.Report.deps.json
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Report\bin\Debug\net10.0\CodeGauge.Report.dll
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Report\bin\Debug\net10.0\CodeGauge.Report.pdb
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Report\bin\Debug\net10.0\CodeGauge.Core.dll
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Report\bin\Debug\net10.0\CodeGauge.Core.pdb
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Report\obj\Debug\net10.0\CodeGauge.Report.csproj.AssemblyReference.cache
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Report\obj\Debug\net10.0\CodeGaug.98D98F4C.Up2Date
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Report\obj\Debug\net10.0\CodeGauge.Report.dll
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Report\obj\Debug\net10.0\refint\CodeGauge.Report.dll
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Report\obj\Debug\net10.0\CodeGauge.Report.pdb
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Report\obj\Debug\net10.0\ref\CodeGauge.Report.dll

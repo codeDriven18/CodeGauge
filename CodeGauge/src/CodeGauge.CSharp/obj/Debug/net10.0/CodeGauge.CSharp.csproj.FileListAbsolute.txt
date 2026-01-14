@@ -1,0 +1,16 @@
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.CSharp\obj\Debug\net10.0\CodeGauge.CSharp.csproj.AssemblyReference.cache
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.CSharp\obj\Debug\net10.0\CodeGauge.CSharp.GeneratedMSBuildEditorConfig.editorconfig
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.CSharp\obj\Debug\net10.0\CodeGauge.CSharp.AssemblyInfoInputs.cache
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.CSharp\obj\Debug\net10.0\CodeGauge.CSharp.AssemblyInfo.cs
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.CSharp\obj\Debug\net10.0\CodeGauge.CSharp.csproj.CoreCompileInputs.cache
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.CSharp\obj\Debug\net10.0\CodeGauge.CSharp.sourcelink.json
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.CSharp\bin\Debug\net10.0\CodeGauge.CSharp.deps.json
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.CSharp\bin\Debug\net10.0\CodeGauge.CSharp.dll
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.CSharp\bin\Debug\net10.0\CodeGauge.CSharp.pdb
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.CSharp\bin\Debug\net10.0\CodeGauge.Core.dll
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.CSharp\bin\Debug\net10.0\CodeGauge.Core.pdb
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.CSharp\obj\Debug\net10.0\CodeGaug.6B4179EB.Up2Date
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.CSharp\obj\Debug\net10.0\CodeGauge.CSharp.dll
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.CSharp\obj\Debug\net10.0\refint\CodeGauge.CSharp.dll
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.CSharp\obj\Debug\net10.0\CodeGauge.CSharp.pdb
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.CSharp\obj\Debug\net10.0\ref\CodeGauge.CSharp.dll

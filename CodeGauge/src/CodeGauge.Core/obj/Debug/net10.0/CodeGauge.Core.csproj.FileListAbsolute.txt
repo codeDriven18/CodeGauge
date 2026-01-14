@@ -1,0 +1,13 @@
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Core\obj\Debug\net10.0\CodeGauge.Core.csproj.AssemblyReference.cache
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Core\obj\Debug\net10.0\CodeGauge.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Core\obj\Debug\net10.0\CodeGauge.Core.AssemblyInfoInputs.cache
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Core\obj\Debug\net10.0\CodeGauge.Core.AssemblyInfo.cs
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Core\obj\Debug\net10.0\CodeGauge.Core.csproj.CoreCompileInputs.cache
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Core\obj\Debug\net10.0\CodeGauge.Core.sourcelink.json
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Core\bin\Debug\net10.0\CodeGauge.Core.deps.json
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Core\bin\Debug\net10.0\CodeGauge.Core.dll
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Core\bin\Debug\net10.0\CodeGauge.Core.pdb
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Core\obj\Debug\net10.0\CodeGauge.Core.dll
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Core\obj\Debug\net10.0\refint\CodeGauge.Core.dll
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Core\obj\Debug\net10.0\CodeGauge.Core.pdb
+C:\proggggg\CodeGauge\CodeGauge\src\CodeGauge.Core\obj\Debug\net10.0\ref\CodeGauge.Core.dll

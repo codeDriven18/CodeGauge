@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "dgSpecHash": "ibwVkskjZEU=",
+  "success": true,
+  "projectFilePath": "C:\\proggggg\\CodeGauge\\CodeGauge\\src\\CodeGauge.Core\\CodeGauge.Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\user\\.nuget\\packages\\libgit2sharp\\0.31.0\\libgit2sharp.0.31.0.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\libgit2sharp.nativebinaries\\2.0.323\\libgit2sharp.nativebinaries.2.0.323.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\system.text.json\\10.0.1\\system.text.json.10.0.1.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1510",
+      "level": "Warning",
+      "message": "PackageReference System.Text.Json will not be pruned. Consider removing this package from your dependencies, as it is likely unnecessary.",
+      "projectPath": "C:\\proggggg\\CodeGauge\\CodeGauge\\src\\CodeGauge.Core\\CodeGauge.Core.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\proggggg\\CodeGauge\\CodeGauge\\src\\CodeGauge.Core\\CodeGauge.Core.csproj",
+      "libraryId": "System.Text.Json",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    }
+  ]
+}

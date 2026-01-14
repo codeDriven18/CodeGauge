@@ -1,0 +1,145 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "CodeGauge - Analyze Your Repository";
+}
+
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-3">📊 CodeGauge</h1>
+        <p class="lead">Automated Code Readiness Scoring for .NET/C# Repositories</p>
+    </div>
+
+    @if (Model.ErrorMessage != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @Model.ErrorMessage
+        </div>
+    }
+
+    @if (Model.Result == null)
+    {
+        <div class="card shadow-lg">
+            <div class="card-body p-5">
+                <h3 class="card-title mb-4">Analyze a Repository</h3>
+                <form method="post" id="analyzeForm">
+                    <div class="mb-3">
+                        <label for="repoUrl" class="form-label">Repository URL</label>
+                        <input type="text" class="form-control form-control-lg" id="repoUrl" name="repoUrl" 
+                               placeholder="https://github.com/username/repository.git" required>
+                        <div class="form-text">Enter a public Git repository URL (GitHub, GitLab, etc.)</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg w-100" id="analyzeBtn">
+                        <span id="btnText">🚀 Analyze Repository</span>
+                        <span id="btnSpinner" class="spinner-border spinner-border-sm d-none" role="status"></span>
+                    </button>
+                </form>
+                <div id="progress" class="mt-3 d-none">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%"></div>
+                    </div>
+                    <p class="text-center mt-2" id="progressText">Processing...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">✅ 7 Categories</h5>
+                        <p class="card-text">Tests, Code Quality, Commits, Docs, Dependencies, Error Handling, Lint</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">📄 PDF Export</h5>
+                        <p class="card-text">Download professional reports ready to share</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">💡 Actionable</h5>
+                        <p class="card-text">Get specific recommendations for improvements</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card shadow-lg mb-4">
+            <div class="card-header bg-@Model.BadgeColor text-white">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h2 class="mb-0">@Model.Result.RepoName</h2>
+                        <small>C# / .NET Repository</small>
+                    </div>
+                    <div class="col-auto">
+                        <div class="display-4">@Model.Result.TotalScore</div>
+                        <div>/ 100</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="mb-4">
+                    <a href="/?handler=DownloadPdf" class="btn btn-danger btn-lg me-2">📥 Download PDF</a>
+                    <a href="/" class="btn btn-secondary btn-lg">🔄 Analyze Another</a>
+                </div>
+
+                <h4 class="mb-3">Category Scores</h4>
+                <div class="row">
+                    @{
+                        void RenderScore(string name, int score, int max)
+                        {
+                            var percentage = max > 0 ? (score * 100.0 / max) : 0;
+                            var barColor = percentage >= 80 ? "success" : percentage >= 60 ? "warning" : "danger";
+                            <div class="col-md-6 mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>@name</span>
+                                    <span>@score / @max</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-@barColor" role="progressbar" style="width: @percentage%"></div>
+                                </div>
+                            </div>
+                        }
+                        
+                        RenderScore("Tests & Coverage", Model.Result.CategoryScores.Tests, 25);
+                        RenderScore("Code Quality", Model.Result.CategoryScores.CodeQuality, 25);
+                        RenderScore("Commit Hygiene", Model.Result.CategoryScores.CommitHygiene, 15);
+                        RenderScore("Documentation", Model.Result.CategoryScores.Documentation, 10);
+                        RenderScore("Dependencies", Model.Result.CategoryScores.Dependencies, 10);
+                        RenderScore("Error Handling", Model.Result.CategoryScores.ErrorHandling, 10);
+                        RenderScore("Lint & Formatting", Model.Result.CategoryScores.LintFormatting, 5);
+                    }
+                </div>
+
+                <h4 class="mt-4 mb-3">Detailed Feedback</h4>
+                @foreach (var feedback in Model.Result.Feedback)
+                {
+                    <div class="card mb-2">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted">[@feedback.Metric]</h6>
+                            <p class="card-text mb-1"><strong>Issue:</strong> @feedback.Issue</p>
+                            <p class="card-text text-success"><strong>→ Recommendation:</strong> @feedback.Recommendation</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    document.getElementById('analyzeForm')?.addEventListener('submit', function() {
+        document.getElementById('btnText').classList.add('d-none');
+        document.getElementById('btnSpinner').classList.remove('d-none');
+        document.getElementById('progress').classList.remove('d-none');
+        document.getElementById('analyzeBtn').disabled = true;
+    });
+</script>

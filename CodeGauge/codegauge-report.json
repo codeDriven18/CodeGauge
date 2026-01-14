@@ -1,0 +1,68 @@
+{
+  "repo_name": "CodeGauge",
+  "primary_language": "C#",
+  "total_score": 36,
+  "category_scores": {
+    "tests": 2,
+    "code_quality": 10,
+    "commit_hygiene": 0,
+    "documentation": 2,
+    "dependencies": 10,
+    "error_handling": 10,
+    "lint_formatting": 2
+  },
+  "feedback": [
+    {
+      "metric": "tests",
+      "score": 0,
+      "issue": "No test projects detected.",
+      "recommendation": "Add unit tests using xUnit/NUnit and aim for 70%\u002B coverage."
+    },
+    {
+      "metric": "code_quality",
+      "score": 10,
+      "issue": "8 method(s) exceed 50 lines.",
+      "recommendation": "Refactor into smaller helpers and reduce responsibilities."
+    },
+    {
+      "metric": "code_quality",
+      "score": 10,
+      "issue": "2 method(s) have nesting depth \u003E3.",
+      "recommendation": "Early returns, guard clauses, or strategy patterns to flatten logic."
+    },
+    {
+      "metric": "code_quality",
+      "score": 10,
+      "issue": "Duplicate code blocks detected (heuristic).",
+      "recommendation": "Extract reusable functions or shared classes to follow DRY."
+    },
+    {
+      "metric": "commit_hygiene",
+      "score": 3,
+      "issue": "2 commit(s) with weak messages.",
+      "recommendation": "Use descriptive, imperative commit messages (e.g., \u0027Add tests for parser\u0027)."
+    },
+    {
+      "metric": "commit_hygiene",
+      "score": 1,
+      "issue": "3 huge commit(s) (\u003E500 lines) detected.",
+      "recommendation": "Split large changes into smaller, reviewable commits."
+    },
+    {
+      "metric": "documentation",
+      "score": 0,
+      "issue": "README not found.",
+      "recommendation": "Add README with overview, setup, usage, and contribution guide."
+    },
+    {
+      "metric": "lint_formatting",
+      "score": 0,
+      "issue": "Formatting or style issues detected by dotnet-format.",
+      "recommendation": "Run \u0060dotnet format\u0060 and add \u0060.editorconfig\u0060 with consistent style rules."
+    }
+  ],
+  "summary_badge": {
+    "score": 36,
+    "color": "red"
+  }
+}

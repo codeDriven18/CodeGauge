@@ -1,0 +1,154 @@
+CodeGauge — Automated Code Readiness Scoring (C#/.NET)
+
+## Two Ways to Use CodeGauge
+
+### 🖥️ Option 1: Command Line (CLI)
+
+For local analysis and CI/CD integration.
+
+```bash
+dotnet run --project src/CodeGauge.CLI -- --path C:\MyRepo --verbose
+```
+
+### 🌐 Option 2: Web Interface (NEW!)
+
+For easy browser-based analysis with PDF export.
+
+```bash
+dotnet run --project src/CodeGauge.Web/CodeGauge.Web.csproj
+# Open http://localhost:5059
+```
+
+**Web Features:**
+- Paste any public Git repository URL
+- Automatic cloning and analysis
+- Beautiful results dashboard
+- Download professional PDF reports
+- No local repo needed
+
+---
+
+## CLI Usage (Detailed)
+
+Overview
+- Purpose: Analyze a repository and generate a 0–100 “Code Readiness Score” for junior developers, with category breakdown and actionable feedback.
+- Stack: C#, .NET 10 Console application.
+- Outputs: JSON (machine-readable) and Markdown (human-readable) reports.
+
+What It Does
+- Scans .NET/C# repositories for the following categories:
+  - Tests & Coverage: Detects tests, attempts to run `dotnet test` with coverage.
+  - Code Quality: Estimates cyclomatic complexity, long methods, deep nesting, duplication (heuristics via Roslyn).
+  - Commit Hygiene: Uses Git history to assess frequency, message quality, and large commits.
+  - Documentation: Checks for README sections and inline comment ratio.
+  - Dependency Management: Parses csproj PackageReferences and checks for outdated packages via NuGet API.
+  - Error Handling: Detects try/catch usage and basic defensive coding patterns.
+  - Lint & Formatting: Attempts `dotnet format --verify-no-changes` and falls back to simple heuristics.
+- Produces:
+  - JSON report (strict schema per spec)
+  - Markdown report (readable, shareable, badge summary)
+
+Installation
+- Prerequisites: .NET SDK 10+ installed (verify with `dotnet --version`).
+- Build:
+  1. Open solution `CodeGauge.sln`.
+  2. Run `dotnet restore` then `dotnet build`.
+
+CLI Usage
+- Run from repository root or provide `--path`:
+  - `dotnet run --project src/CodeGauge.CLI -- --path <repo_path> --out-json <json_path> --out-md <md_path> --verbose`
+- Options:
+  - `--path`: Target repo path (default: current directory)
+  - `--out-json`: JSON output file (default: `codegauge-report.json`)
+  - `--out-md`: Markdown output file (default: `codegauge-report.md`)
+  - `--verbose`: Extra logs (default: false)
+
+Scoring System (Weights)
+- Tests & Coverage: 25
+- Code Quality: 25
+- Commit Hygiene: 15
+- Documentation: 10
+- Dependencies: 10
+- Error Handling: 10
+- Lint & Formatting: 5
+- Total: 100
+
+Output Schema (JSON)
+{
+  "repo_name": "...",
+  "primary_language": "C#",
+  "total_score": 0,
+  "category_scores": {
+    "tests": 0,
+    "code_quality": 0,
+    "commit_hygiene": 0,
+    "documentation": 0,
+    "dependencies": 0,
+    "error_handling": 0,
+    "lint_formatting": 0
+  },
+  "feedback": [
+    { "metric": "tests", "score": 0, "issue": "...", "recommendation": "..." }
+  ],
+  "summary_badge": { "score": 0, "color": "green|yellow|red" }
+}
+
+Badge & Tiers
+- Color: green (76+), yellow (51–75), red (0–50).
+- Tier mapping:
+  - Junior: 0–50
+  - Mid: 51–75
+  - Senior: 76–90
+  - Elite: 91–100
+
+Recommendations & Deductions
+- Every deduction includes a plain-English explanation and a concrete recommendation.
+- Examples:
+  - Low coverage: “Increase test coverage; prioritize critical modules.”
+  - Large commits: “Split into smaller, reviewable commits.”
+  - Lint failures: “Run `dotnet format` and enforce `.editorconfig`.”
+
+Trend Analysis (Optional)
+- Commit trends over 12 weeks (frequency).
+- Coverage trends can be aggregated if reports are stored across runs.
+- Complexity trend via aggregated metrics per run.
+
+CI/CD Integration (Optional)
+- GitHub Actions example:
+  - name: CodeGauge
+    on: [push, pull_request]
+    jobs:
+      analyze:
+        runs-on: windows-latest
+        steps:
+          - uses: actions/checkout@v4
+          - uses: actions/setup-dotnet@v4
+            with:
+              dotnet-version: '10.0.x'
+          - name: Restore and Build CodeGauge
+            run: |
+              dotnet restore CodeGauge/CodeGauge/CodeGauge.sln
+              dotnet build CodeGauge/CodeGauge/CodeGauge.sln --configuration Release
+          - name: Run CodeGauge on repo
+            run: |
+              dotnet run --project CodeGauge/CodeGauge/src/CodeGauge.CLI -- --path . --out-json codegauge-report.json --out-md codegauge-report.md
+          - name: Upload Reports
+            uses: actions/upload-artifact@v4
+            with:
+              name: codegauge-reports
+              path: |
+                codegauge-report.json
+                codegauge-report.md
+
+Extensibility
+- Modular analyzers via `IAnalyzer` interface; add new language modules under `CodeGauge.<Lang>`.
+- Adjust weights via constants in `CodeGauge.Core.Models.Weights`.
+
+Limitations & Notes
+- Coverage parsing uses best-effort heuristics for `XPlat Code Coverage` output.
+- Dependency updates rely on reachable NuGet API; network failures are tolerated.
+- Lint detection prefers `dotnet format` when a solution is present.
+
+Support
+- Main language: C#, .NET
+- Open issues or extend analyzers under `src/CodeGauge.*`.
